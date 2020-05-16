@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import {
   Collapse,
   Navbar,
@@ -9,8 +10,10 @@ import {
   NavLink,
   NavbarText
 } from 'reactstrap';
+import { User } from '../../store/types/User';
 
 const NavBar = (): JSX.Element => {
+  const user: User = useSelector(state => state.userReducer);
   const [isOpen, setIsOpen] = useState<Boolean>(false);
 
   const toggle: () => void = () => setIsOpen(!isOpen);
@@ -22,7 +25,7 @@ const NavBar = (): JSX.Element => {
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
-          <NavbarText>FirstName LastName</NavbarText>
+          <NavbarText>{`${user.firstName} ${user.lastName}`}</NavbarText>
             <NavItem>
               <NavLink>login</NavLink>
             </NavItem>
