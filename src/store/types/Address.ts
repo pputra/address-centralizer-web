@@ -5,4 +5,5 @@ export interface Address {
   state: string
   country: string
   zip: number
+  active: boolean
 }

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchCustAddresses } from '../../store/actions/address.action';
 import { AddressReducerState } from '../../store/types/AddressReducerState';
+import  AddressList from './components/AddressList';
 import './styles.css';
 
 function HomePage(): JSX.Element {
@@ -19,11 +20,7 @@ function HomePage(): JSX.Element {
 
   return (
     <div className="App">
-      <header className="App-header">
-       Addresses:
-       <br/>
-       {JSON.stringify(addressReducerState)}
-      </header>
+      <AddressList addresses={addressReducerState.addresses} />
     </div>
   );
 }
