@@ -1,30 +1,28 @@
 import React, { useEffect } from 'react';
-import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchCustAddresses } from '../../store/actions/address.action';
+import { AddressReducerState } from '../../store/types/AddressReducerState';
 import './styles.css';
-import { DEFAULT_URL } from '../../config';
 
 function HomePage(): JSX.Element {
-  async function onFetchCustAddresses(): Promise<void> {
-    try {
-      const response= await axios({
-        method: 'GET',
-        url: `${DEFAULT_URL}/customers/1`,
-      });
-  
-      console.log(response.data);
-    } catch (err) {
-      console.error(err.message);
-    }
+  const addressReducerState: AddressReducerState = useSelector(state => state.addressReducer);
+  const dispatch = useDispatch();
+
+  function onFetchCustAddresses(): void {
+    dispatch(fetchCustAddresses(1));
   }
 
   useEffect(() => {
     onFetchCustAddresses();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="App">
       <header className="App-header">
-       Home
+       Addresses:
+       <br/>
+       {JSON.stringify(addressReducerState)}
       </header>
     </div>
   );

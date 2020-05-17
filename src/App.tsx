@@ -10,7 +10,7 @@ function App() {
       <Fragment>
         <NavBar />
         <HomePage />
-    </Fragment>
+      </Fragment>
     </Provider>
   );
 }
