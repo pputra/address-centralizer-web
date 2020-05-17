@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchCustAddresses } from '../../store/actions/address.action';
 import { AddressReducerState } from '../../store/types/AddressReducerState';
-import  AddressList from './components/AddressList';
 import './styles.css';
+import Loading from '../components/Loading';
+
+const AddressList = lazy(() => import('./components/AddressList'));
 
 function HomePage(): JSX.Element {
   const addressReducerState: AddressReducerState = useSelector(state => state.addressReducer);
@@ -20,7 +22,9 @@ function HomePage(): JSX.Element {
 
   return (
     <div className="App">
-      <AddressList addresses={addressReducerState.addresses} />
+      <Suspense fallback={<Loading />}>
+        <AddressList addresses={addressReducerState.addresses} />
+      </Suspense>
     </div>
   );
 }
