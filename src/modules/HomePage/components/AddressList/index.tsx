@@ -11,9 +11,9 @@ function AddressList(props: Props): JSX.Element {
 
   return (
     <Fragment>
-       {addresses.map((el) => (
-         <AddressCard address={el} />
-       ))}
+      {addresses.map((el) => (
+        <AddressCard address={el} />
+      ))}
     </Fragment>
   );
 }
