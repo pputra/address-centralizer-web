@@ -4,8 +4,8 @@ import { Button } from 'reactstrap';
 import { fetchCustAddresses } from '../../store/actions/address.action';
 import { AddressReducerState } from '../../store/types/AddressReducerState';
 import './styles.css';
-import Loading from '../components/Loading';
-import Modal from '../components/Modal';
+import Loading from '../../components/Loading';
+import Modal from '../../components/Modal';
 
 const AddressList = lazy(() => import('./components/AddressList'));
 
