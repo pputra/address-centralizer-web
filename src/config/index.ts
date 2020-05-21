@@ -1,5 +1,3 @@
-import { DEFAULT_URL } from './api'
+import api from './api';
 
-export{
-  DEFAULT_URL,
-};
+export { api };

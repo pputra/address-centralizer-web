@@ -7,10 +7,7 @@ export const defaultState: User = {
   lastName: 'lastName',
 };
 
-const userReducer = (
-  state = defaultState,
-  action: AppActions
-): User => {
+const userReducer = (state = defaultState, action: AppActions): User => {
   switch (action.type) {
     case SET_USER_DATA:
       return {
@@ -20,7 +17,7 @@ const userReducer = (
     case CLEAR_USER_DATA:
       return defaultState;
     default:
-      return state
+      return state;
   }
 };
 

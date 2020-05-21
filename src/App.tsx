@@ -4,7 +4,7 @@ import { store } from './store';
 import HomePage from './modules/HomePage';
 import NavBar from './modules/NavBar';
 
-function App() {
+function App(): JSX.Element {
   return (
     <Provider store={store}>
       <Fragment>

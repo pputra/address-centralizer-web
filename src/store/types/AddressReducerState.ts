@@ -1,6 +1,6 @@
-import { Address } from "./Address";
+import { Address } from './Address';
 
 export interface AddressReducerState {
-  addresses: Address[]
-  success: boolean
+  addresses: Address[];
+  success: boolean;
 }

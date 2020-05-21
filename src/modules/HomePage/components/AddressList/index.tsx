@@ -3,7 +3,7 @@ import AddressCard from '../AddressCard';
 import { Address } from '../../../../store/types/Address';
 
 interface Props {
-  addresses: Address[]
+  addresses: Address[];
 }
 
 function AddressList(props: Props): JSX.Element {
@@ -12,7 +12,7 @@ function AddressList(props: Props): JSX.Element {
   return (
     <Fragment>
       {addresses.map((el) => (
-        <AddressCard address={el} />
+        <AddressCard address={el} key={el.id} />
       ))}
     </Fragment>
   );

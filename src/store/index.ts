@@ -14,6 +14,5 @@ export type AppState = ReturnType<typeof combinedReducers>;
 
 export const store = createStore(
   combinedReducers,
-  composeEnhancers(
-    applyMiddleware(thunk as ThunkMiddleware<AppState, AppActions>)
-));
+  composeEnhancers(applyMiddleware(thunk as ThunkMiddleware<AppState, AppActions>)),
+);

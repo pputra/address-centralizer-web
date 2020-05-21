@@ -1,1 +1,5 @@
-export const DEFAULT_URL: string = 'http://localhost:8080/api/v1';
+const DEFAULT_URL = 'http://localhost:8080/api/v1';
+
+export default {
+  DEFAULT_URL,
+};

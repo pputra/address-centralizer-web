@@ -12,7 +12,7 @@ const AddressList = lazy(() => import('./components/AddressList'));
 function HomePage(): JSX.Element {
   const [isModalOpen, setModalIsOpen] = useState<boolean>(false);
 
-  const addressReducerState: AddressReducerState = useSelector(state => state.addressReducer);
+  const addressReducerState: AddressReducerState = useSelector((state) => state.addressReducer);
   const dispatch = useDispatch();
 
   function toggleModal(): void {
@@ -25,7 +25,6 @@ function HomePage(): JSX.Element {
 
   useEffect(() => {
     onFetchCustAddresses();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -41,8 +40,8 @@ function HomePage(): JSX.Element {
           submitLabel={'submit'}
           submitFn={toggleModal}
           cancelLabel={'cancel'}
-         >
-         this is modal body
+        >
+          this is modal body
         </Modal>
         <AddressList addresses={addressReducerState.addresses} />
       </Suspense>

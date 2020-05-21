@@ -1,22 +1,22 @@
-import { Dispatch } from "redux";
-import axios from 'axios'
-import { AppActions } from "./AppActionTypes";
-import { DEFAULT_URL } from "../../config";
-import { Address } from "../types/Address";
+import { Dispatch } from 'redux';
+import axios from 'axios';
+import { AppActions } from './AppActionTypes';
+import { api } from '../../config';
+import { Address } from '../types/Address';
 
 export const FETCH_CUST_ADDRESS_REQUEST = 'FETCH_CUST_ADDRESS_REQUEST';
 export const FETCH_CUST_ADDRESS_SUCCESS = 'FETCH_CUST_ADDRESS_SUCCESS';
 export const FETCH_CUST_ADDRESS_FAILURE = 'FETCH_CUST_ADDRESS_FAILURE';
 
-export interface FetchCustAddressesSuccessAction  {
+export interface FetchCustAddressesSuccessAction {
   type: typeof FETCH_CUST_ADDRESS_SUCCESS;
   payload: {
-    addresses: Address[]
-  }
+    addresses: Address[];
+  };
 }
 
 export interface FetchCustAddressesFailureAction {
-  type:typeof FETCH_CUST_ADDRESS_FAILURE;
+  type: typeof FETCH_CUST_ADDRESS_FAILURE;
 }
 
 const createFetchAddressSuccessAction = (addresses: Address[]): AppActions => ({
@@ -27,24 +27,26 @@ const createFetchAddressSuccessAction = (addresses: Address[]): AppActions => ({
 });
 
 const createFetchAddressFailureAction = (): AppActions => ({
-  type: "FETCH_CUST_ADDRESS_FAILURE",
+  type: 'FETCH_CUST_ADDRESS_FAILURE',
 });
 
 export function fetchCustAddresses(uid: number) {
-  return async (dispatch: Dispatch<AppActions>) => {
+  return async (dispatch: Dispatch<AppActions>): Promise<AppActions> => {
     try {
-      const { data: { data } } = await axios({
+      const {
+        data: { data },
+      } = await axios({
         method: 'GET',
-        url: `${DEFAULT_URL}/customers/${uid}`,
+        url: `${api.DEFAULT_URL}/customers/${uid}`,
       });
-      
+
       const addresses: Array<Address> = data.addresses;
 
       return dispatch(createFetchAddressSuccessAction(addresses));
     } catch (err) {
       return dispatch(createFetchAddressFailureAction());
     }
-  }
+  };
 }
 
 export type AddressActionTypes = FetchCustAddressesSuccessAction | FetchCustAddressesFailureAction;
