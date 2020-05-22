@@ -6,6 +6,7 @@ import { AddressReducerState } from '../../store/types/AddressReducerState';
 import './styles.css';
 import Loading from '../../components/Loading';
 import Modal from '../../components/Modal';
+import AddressForm, { AddressFormProps } from './components/AddressForm';
 import { useInput } from '../../hooks/useInput';
 
 const AddressList = lazy(() => import('./components/AddressList'));
@@ -16,7 +17,11 @@ function HomePage(): JSX.Element {
   const addressReducerState: AddressReducerState = useSelector((state) => state.addressReducer);
   const dispatch = useDispatch();
 
-  const { value, bind, reset } = useInput('');
+  const { value: streetValue, bind: streetBind, reset: streetReset } = useInput('');
+  const { value: cityValue, bind: cityBind, reset: cityReset } = useInput('');
+  const { value: stateValue, bind: stateBind, reset: stateReset } = useInput('');
+  const { value: countryValue, bind: countryBind, reset: countryReset } = useInput('');
+  const { value: zipValue, bind: zipBind, reset: zipReset } = useInput('');
 
   function toggleModal(): void {
     setModalIsOpen(!isModalOpen);
@@ -26,10 +31,50 @@ function HomePage(): JSX.Element {
     dispatch(fetchCustAddresses(1));
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
+  function handleNewAddressSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
-    alert(value);
-    reset();
+    console.log(streetValue);
+    console.log(cityValue);
+    console.log(stateValue);
+    console.log(countryValue);
+    console.log(zipValue);
+    resetAddressForm();
+    toggleModal();
+  }
+
+  function resetAddressForm(): void {
+    streetReset();
+    cityReset();
+    stateReset();
+    countryReset();
+    zipReset();
+  }
+
+  function createAddressFormProps(): AddressFormProps {
+    const props: AddressFormProps = {
+      street: {
+        value: streetValue,
+        bind: streetBind,
+      },
+      city: {
+        value: cityValue,
+        bind: cityBind,
+      },
+      state: {
+        value: stateValue,
+        bind: stateBind,
+      },
+      country: {
+        value: countryValue,
+        bind: countryBind,
+      },
+      zip: {
+        value: zipValue,
+        bind: zipBind,
+      },
+      handleSubmit: handleNewAddressSubmit,
+    };
+    return props;
   }
 
   useEffect(() => {
@@ -51,13 +96,7 @@ function HomePage(): JSX.Element {
           submitFn={toggleModal}
           cancelLabel={'cancel'}
         >
-          <form onSubmit={handleSubmit}>
-            <label>
-              test:
-              <input type="text" {...bind} />
-            </label>
-            <input type="submit" value="Submit" />
-          </form>
+          <AddressForm {...createAddressFormProps()} />
         </Modal>
         <AddressList addresses={addressReducerState.addresses} />
       </Suspense>
